@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookie from "js-cookie"
 import NavBar from "../Nav/navbar"
@@ -46,7 +47,9 @@ export default class Cart extends Component{
                     <div>{item.item_name}</div>
                     <div>${item.item_price}.00</div>
                     <div>x 1</div>
-                    <button onClick={()=>this.removeFromCart(item.id)}>remove</button>
+                        <div className="remove-button">
+                            <Link to="/"  onClick={()=>this.removeFromCart(item.id)}>remove</Link>
+                        </div>
                 </div>
             )
         })
@@ -71,10 +74,9 @@ export default class Cart extends Component{
             this.setState({
                 cart: [response.data]
             })
-            alert("Item Removed")
-            setTimeout(()=>{window.location.reload()}, 1000)
             
         })
+        alert("Item Removed")
     }
 
     handleCheckout(){
@@ -88,9 +90,8 @@ export default class Cart extends Component{
                 })
             }
         }
-            alert("Purchase Completed!")
-            setTimeout(()=>{window.location.reload()}, 1000)
-            
+        alert("Purchase Completed!")
+               
     }
 
     render(){
@@ -103,9 +104,13 @@ export default class Cart extends Component{
                     </div>
                     <div>
                     {this.state.displayCart.length > 0 ? (`Total: $ ${this.renderTotal()}`) : null}
-                    <div>
-                        <button className="checkout-button" onClick={()=>{this.handleCheckout()}}>Checkout</button>
+                    {this.state.displayCart.length > 0 ?
+                    <div className="checkout-button">
+                        <Link to="/"  onClick={()=>{this.handleCheckout()}}>Checkout</Link>
                     </div>
+                    :
+                    null
+                    }
                     
                     </div>
                 </div>
