@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookie from "js-cookie"
 import NavBar from "../Nav/navbar"
@@ -47,7 +46,6 @@ export default class Cart extends Component{
                     <div>{item.item_name}</div>
                     <div>${item.item_price}.00</div>
                     <div>x 1</div>
-                    
                     <button onClick={()=>this.removeFromCart(item.id)}>remove</button>
                 </div>
             )
@@ -74,6 +72,7 @@ export default class Cart extends Component{
                 cart: [response.data]
             })
             alert("Item Removed")
+            setTimeout(()=>{window.location.reload()}, 1000)
             
         })
     }

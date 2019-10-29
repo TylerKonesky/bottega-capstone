@@ -4,7 +4,6 @@ import "./nav-bar.css"
 
 
 function NavBar(props) {
-    console.log(props)
   return (
     <div className="nav-bar-wrapper">
         <div className="nav-bar-logo">

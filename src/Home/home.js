@@ -14,8 +14,8 @@ export default class Home extends Component {
         categories: [],
         currentCategory: "",
         username: ''
-
     }
+    
     this.getCategories = this.getCategories.bind(this)
     this.renderCategories = this.renderCategories.bind(this)
     this.getData = this.getData.bind(this)
@@ -49,8 +49,7 @@ export default class Home extends Component {
         }else{
             let cookiess = Math.floor(Math.random()*1000000)
             Cookie.set("USERNAME", cookiess, {expires: 1})
-        }
-            
+        }     
     }
 
     getData(){
@@ -100,7 +99,6 @@ export default class Home extends Component {
              </Link>
         )
 
-        // console.log("Test filter", this.state.stuff.filter(item => item.item_category == this.state.currentCategory))
       })}else{
           let filteredItems = this.state.stuff.filter(item => item.item_category == this.state.currentCategory)
           return filteredItems.map(item =>{
@@ -116,15 +114,13 @@ export default class Home extends Component {
                         
                     </div>
                  </Link>
-            )
+                )
     
-            // console.log("Test filter", this.state.stuff.filter(item => item.item_category == this.state.currentCategory))
-          }
-          )}
+            }
+        )}
   }
 
   render() {
-    console.log("Test",this.state.categories)
     return (
       <div className="home-page-wrapper">
             <Navbar page="Home"></Navbar>

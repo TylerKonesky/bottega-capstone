@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../Nav/navbar"
 import "./item.css"
@@ -23,16 +22,11 @@ export default class Item extends Component {
       this.getItem();
       this.setState({
           userName: Cookie.get("USERNAME").toString()
-      })
-      
-    //   this.setCurrentItem();
-      
+      }) 
   }
-
 
   getItem(){
       axios.get(`https://bottega-project-server-db.herokuapp.com/item/${this.props.match.params.id}`).then(response =>{
-          console.log(response.data)
           this.setState({
               currentItem: [response.data]
           })
@@ -40,11 +34,8 @@ export default class Item extends Component {
   }
 
   addToCart(){
-      console.log(this.state.userName, this.props.match.params.id)
       axios.post(`https://bottega-project-server-db.herokuapp.com/addToCart`, {user_id : this.state.userName, cart_item: Number(this.props.match.params.id)}).then(response=> {
-        console.log("Item Added", response.data)
         alert("Item added to cart")
-        
       })
   }
 
@@ -65,7 +56,6 @@ export default class Item extends Component {
 
 
   render() {
-      
     return (
         <div>
             <NavBar page={"View Item"}></NavBar>
