@@ -86,9 +86,7 @@ export default class Cart extends Component{
                 }).catch(err =>{
                     console.log("delete error", err)
                 })
-                
             }
-            
         }
             alert("Purchase Completed!")
             setTimeout(()=>{window.location.reload()}, 1000)
