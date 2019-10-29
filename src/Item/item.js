@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../Nav/navbar"
-import Cart from "../Cart/cart"
+import "./item.css"
 
 import Cookie from "js-cookie"
 
@@ -50,12 +50,12 @@ export default class Item extends Component {
    renderItem(){
        return this.state.currentItem.map(item=>{
            return(
-               <div>
-                   <div>{item.item_name}</div>
+               <div className="cart-page-items">
+                   <div className="item-name">{item.item_name}</div>
 
-                   <div>{item.item_description}</div>
-                   <div>${item.item_price}.00</div>
-                   <button onClick={this.addToCart}>Add to Cart</button>
+                   <div className="item-description">{item.item_description}</div>
+                   <div className="item-price">${item.item_price}.00</div>
+                   <button className="item-button" onClick={this.addToCart}>Add to Cart</button>
 
                </div>
            )
@@ -66,12 +66,14 @@ export default class Item extends Component {
   render() {
       
     return (
-      <div>
-          <NavBar page={"View Item"}></NavBar>
-          
-          {this.state.currentItem.length > 0 ? this.renderItem(): "loading...."}
-          
-      </div>
+        <div>
+            <NavBar page={"View Item"}></NavBar>
+            <div className="cart-page-wrapper">
+                
+                {this.state.currentItem.length > 0 ? this.renderItem(): "loading...."}
+
+            </div>
+        </div>
     );
   }
 }

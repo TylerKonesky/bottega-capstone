@@ -1,18 +1,24 @@
 .nav-bar-wrapper{
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
+    border: 1px solid transparent;
     align-items: center;
     padding: 10px;
     height: 10vh;
-    background-color: lightblue;
+    background-color: #50FFb1;
     font-weight: bold;
+    color: #546D64
     
 
 }
 
 .nav-bar-logo{
     width: 33vw;
+}
+
+.nav-bar-logo a{
+    text-decoration: none;
+    color: #546D64;
 }
 
 .nav-bar-name{
@@ -33,6 +39,7 @@
 .nav-bar-link a{
     text-decoration: none;
     cursor: pointer;
+    color: #546D64
 }
 
 @media (max-width: 42em) {

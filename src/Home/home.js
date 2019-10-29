@@ -10,20 +10,9 @@ export default class Home extends Component {
     super(props);
 
     this.state = {
-        stuff: [
-            // {id: 1, name: "Shoes", description: "White Nike Elite 500", category: "Clothes", cost: 99.99, img: ""},
-            // {id: 2, name: "Shirt", description: "White Nike Elite 500", category: "Clothes", cost: 99.99, img: ""},
-            // {id: 3, name: "Pants", description: "White Nike Elite 500", category: "Clothes", cost: 99.99, img: ""},
-            // {id: 4, name: "More pants", description: "White Nike Elite 500", category: "Clothes", cost: 99.99, img: ""},
-            // {id: 5, name: "Golf Clubs", description: "White Nike Elite 500", category: "Sporting Goods", cost: 99.99, img: ""},
-            // {id: 6, name: "Cheese", description: "White Nike Elite 500", category: "Food", cost: 99.99, img: ""},
-            // {id: 7, name: "Milk", description: "White Nike Elite 500", category: "Food", cost: 99.99, img: ""},
-            // {id: 8, name: "Lemons", description: "White Nike Elite 500", category: "Food", cost: 99.99, img: ""},
-            // {id: 9, name: "Suit", description: "White Nike Elite 500", category: "Clothes", cost: 99.99, img: ""},
-            // {id: 10, name: "Belt", description: "White Nike Elite 500", category: "Clothes", cost: 99.99, img: ""},
-            // {id: 11, name: "Fish", description: "White Nike Elite 500", category: "Cats", cost: 99.99, img: ""},
-        ],
+        stuff: [],
         categories: [],
+        currentCategory: "",
         username: ''
 
     }
@@ -75,35 +64,63 @@ export default class Home extends Component {
     
 
     renderCategories(){
-        console.log("what time is it?")
         return this.state.categories.map(category =>{
             return(
                 <div className="individual-category">
-                    <button href="/">{category}</button>
+                    <button onClick={()=>this.handleFilter(category)}>{category}</button>
                 </div>
             )
         })
+    }
+
+    handleFilter = (category) =>{
+        this.setState({
+            currentCategory: category
+        })
+
     }
   
 
 
 
   renderItems(){
-      
+    if(this.state.currentCategory == ""){
       return this.state.stuff.map(item =>{
+          
         return(
             <Link to={`/item/${item.id}`}>
                 <div className="individual-items">
-                    {item.item_name}
-                    <br></br>
-                    {item.item_description}
-                    <br></br>
-                    ${item.item_price}.00
-                    <br></br>
+                    <div>{item.item_name}</div>
+                    
+                    <div>{item.item_description}</div>
+                    
+                    <div>${item.item_price}.00</div>
+                    
                 </div>
              </Link>
         )
-      })
+
+        // console.log("Test filter", this.state.stuff.filter(item => item.item_category == this.state.currentCategory))
+      })}else{
+          let filteredItems = this.state.stuff.filter(item => item.item_category == this.state.currentCategory)
+          return filteredItems.map(item =>{
+          
+            return(
+                <Link to={`/item/${item.id}`}>
+                    <div className="individual-items">
+                        <div>{item.item_name}</div>
+                        
+                        <div>{item.item_description}</div>
+                        
+                        <div>${item.item_price}.00</div>
+                        
+                    </div>
+                 </Link>
+            )
+    
+            // console.log("Test filter", this.state.stuff.filter(item => item.item_category == this.state.currentCategory))
+          }
+          )}
   }
 
   render() {
@@ -113,7 +130,7 @@ export default class Home extends Component {
             <Navbar page="Home"></Navbar>
             <div className="home-page-content-wrapper">
                 <div className="home-page-categories">
-                    
+                    <button className="free-button" onClick={()=>this.handleFilter("")}>Reset</button>
                     {this.state.categories.length > 0 ? this.renderCategories() : null}
                 </div>
                 <div className="home-page-items">

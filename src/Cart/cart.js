@@ -4,6 +4,8 @@ import axios from "axios";
 import Cookie from "js-cookie"
 import NavBar from "../Nav/navbar"
 
+import "./cart.css"
+
 export default class Cart extends Component{
     constructor(props){
         super(props);
@@ -40,8 +42,11 @@ export default class Cart extends Component{
     renderCart = () =>{
         return this.state.displayCart.map(item =>{
             return(
-                <div>
-                    {item.item_name}
+                <div className="cart-item-details">
+                    <div>{item.item_name}</div>
+                    <div>${item.item_price}.00</div>
+                    <div>x 1</div>
+                    
                     <button onClick={()=>this.removeFromCart(item.id)}>remove</button>
                 </div>
             )
@@ -76,10 +81,14 @@ export default class Cart extends Component{
         return(
             <div>
                 <NavBar page={"Cart"}></NavBar>
-                
-                {this.state.displayCart.length > 0 ? this.renderCart() : "Cart is Empty"}
-
-                {this.state.displayCart.length > 0 ? (`Total: $ ${this.renderTotal()}`) : null}
+                <div className="cart-items-wrapper">
+                    <div>
+                    {this.state.displayCart.length > 0 ? this.renderCart() : "Cart is Empty"}
+                    </div>
+                    <div>
+                    {this.state.displayCart.length > 0 ? (`Total: $ ${this.renderTotal()}`) : null}
+                    </div>
+                </div>
             </div>
         )
     }

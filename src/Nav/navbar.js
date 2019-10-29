@@ -8,7 +8,8 @@ function NavBar(props) {
   return (
     <div className="nav-bar-wrapper">
         <div className="nav-bar-logo">
-            <div>Logo</div>
+
+            <a href="/">Logo</a>
         </div>
         <div className="nav-bar-name">
             {props.page}
