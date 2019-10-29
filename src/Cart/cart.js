@@ -14,6 +14,7 @@ export default class Cart extends Component{
             displayCart: []
         }
         this.removeFromCart = this.removeFromCart.bind(this)
+        this.handleCheckout = this.handleCheckout.bind(this)
     }
 
     componentDidMount(){
@@ -73,8 +74,26 @@ export default class Cart extends Component{
                 cart: [response.data]
             })
             alert("Item Removed")
-            window.location.reload()
+            
         })
+    }
+
+    handleCheckout(){
+        for(let i = 0; i < this.state.cart.length; i++){
+            if(this.state.cart[i].user_id == Cookie.get("USERNAME")){
+                console.log(this.state.cart[i].id)
+                axios.delete(`https://bottega-project-server-db.herokuapp.com/removeitem/${this.state.cart[i].id}`).then(response =>{
+                    console.log("Item purchsed")
+                }).catch(err =>{
+                    console.log("delete error", err)
+                })
+                
+            }
+            
+        }
+            alert("Purchase Completed!")
+            setTimeout(()=>{window.location.reload()}, 1000)
+            
     }
 
     render(){
@@ -87,6 +106,10 @@ export default class Cart extends Component{
                     </div>
                     <div>
                     {this.state.displayCart.length > 0 ? (`Total: $ ${this.renderTotal()}`) : null}
+                    <div>
+                        <button className="checkout-button" onClick={()=>{this.handleCheckout()}}>Checkout</button>
+                    </div>
+                    
                     </div>
                 </div>
             </div>
