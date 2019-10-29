@@ -87,7 +87,7 @@
         
     }
 
-    .individual-category button{
+    .individual-category button, .free-button{
         margin: 5px;
         width: 30vw;
         height: 40px;

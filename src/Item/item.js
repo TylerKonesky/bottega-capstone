@@ -43,6 +43,7 @@ export default class Item extends Component {
       console.log(this.state.userName, this.props.match.params.id)
       axios.post(`https://bottega-project-server-db.herokuapp.com/addToCart`, {user_id : this.state.userName, cart_item: Number(this.props.match.params.id)}).then(response=> {
         console.log("Item Added", response.data)
+        alert("Item added to cart")
         
       })
   }
